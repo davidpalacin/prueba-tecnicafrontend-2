@@ -4,7 +4,6 @@ import router from "@/router";
 
 export const LoginStore = defineStore("login", () => {
   async function login(name: string, pass: string) {
-
     console.log(`Intentas loggear con ${name} y ${pass}`);
     const data = {
       name: name,
@@ -24,6 +23,12 @@ export const LoginStore = defineStore("login", () => {
       router.push({
         name: "dashboard",
         params: {
+          name: name,
+          accessToken: res.accessToken,
+          role: res.userData.role
+        },
+        query: {
+          name: name,
           accessToken: res.accessToken,
           role: res.userData.role
         }
