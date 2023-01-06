@@ -26,22 +26,9 @@ export default {
       const res = await req.json();
       console.log(res);
       location.reload();
-    },
-    async updateUser(id: number) {
-      const req = await fetch('http://localhost:3000/api/users/update/' + id, {
-        method: "put",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({name: "nuevoNombre"})
-      });
-      const res = await req.json();
-      console.log(res);
-      location.reload();
     }
   }
 }
-
-
-
 </script>
 
 <template>
