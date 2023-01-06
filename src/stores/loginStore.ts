@@ -1,5 +1,6 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
+import router from "@/router";
 
 export const LoginStore = defineStore("login", () => {
   async function login(name: string, pass: string) {
@@ -19,7 +20,17 @@ export const LoginStore = defineStore("login", () => {
     });
     const res = await req.json();
 
-    console.log(res);
+    if (res.accessToken) {
+      router.push({
+        name: "dashboard",
+        params: {
+          accessToken: res.accessToken,
+          role: res.userData.role
+        }
+      });
+    } else {
+      console.log("no hay access token");
+    }
 
   }
 
