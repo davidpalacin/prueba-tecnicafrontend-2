@@ -19,11 +19,28 @@ export default {
     async getAllUsers(){
       const req = await fetch('http://localhost:3000/api/users');
       const res = await req.json();
-      console.log(res);
       this.userArr = res;
+    },
+    async deleteUser(id: number) {
+      const req = await fetch('http://localhost:3000/api/users/delete/' + id,{ method: "delete" });
+      const res = await req.json();
+      console.log(res);
+      location.reload();
+    },
+    async updateUser(id: number) {
+      const req = await fetch('http://localhost:3000/api/users/update/' + id, {
+        method: "put",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name: "nuevoNombre"})
+      });
+      const res = await req.json();
+      console.log(res);
+      location.reload();
     }
   }
 }
+
+
 
 </script>
 
@@ -48,8 +65,8 @@ export default {
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.role}}</td>
-            <td><button>delete</button></td>
-            <td><button>update</button></td>
+            <td><button @click="deleteUser(user.id)">delete</button></td>
+            <td><button @click="updateUser(user.id)">update</button></td>
           </tr>
         </tbody>
       </table>
